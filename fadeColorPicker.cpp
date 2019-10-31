@@ -11,6 +11,6 @@ HSLAPixel fadeColorPicker::operator()(point p)
     HSLAPixel colour = c.color;
     int distSq = abs(c.x-p.x)**2 + abs(c.y-p.y)**2
     double newL = colour.l * (fadeFactor ** distSq)
-
-
+    colour.l  = newL;
+    return colour;
 }
