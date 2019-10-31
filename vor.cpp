@@ -19,6 +19,8 @@ animation filler::vorSolidDFS(PNG& img, double density, int frameFreq)
     /**
      * @todo Your code here! 
      */
+    solidColorPicker a();
+    return vor<Stack>(img, density, a, frameFreq);
 
 }
 
@@ -27,7 +29,8 @@ animation filler::vorFadeDFS(PNG& img, double density, double fadeFactor, int fr
     /**
      * @todo Your code here! 
      */
-
+    fadeColorPicker a(fadeFactor);
+    return vor<Stack>(img, density, a, frameFreq);
 }
 
 
@@ -44,6 +47,8 @@ animation filler::vorSolidBFS(PNG& img, double density, int frameFreq)
     /**
      * @todo Your code here! 
      */
+    solidColorPicker a();
+    return vor<Queue>(img, density, a, frameFreq);
 }
 
 animation filler::vorFadeBFS(PNG& img, double density, double fadeFactor, int frameFreq)
@@ -51,6 +56,8 @@ animation filler::vorFadeBFS(PNG& img, double density, double fadeFactor, int fr
     /**
      * @todo Your code here! 
      */
+    fadeColorPicker a(fadeFactor);
+    return vor<Queue>(img, density, a, frameFreq);
 }
 
 
