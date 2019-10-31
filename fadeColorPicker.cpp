@@ -2,11 +2,15 @@
 
 fadeColorPicker::fadeColorPicker(double fade)
 {
-    /* your code here */
+    fadeFactor = fade;
 }
 
 HSLAPixel fadeColorPicker::operator()(point p)
 {
-    /* your code here */
+    Center c = p.c;
+    HSLAPixel colour = c.color;
+    int distSq = abs(c.x-p.x)**2 + abs(c.y-p.y)**2
+    double newL = colour.l * (fadeFactor ** distSq)
+
 
 }
