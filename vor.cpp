@@ -175,14 +175,84 @@ animation filler::vor(PNG& img, double density, colorPicker& fillColor,
       * we will be grading vor.h. File "vor_given.cpp also includes the function
       * used to generate the original set of centers. 
       */
-
+     unordered_set <string> coordinates;
      vector<center> centers = randSample(img, density);
      vector<OrderingStructure<point>> orderingStructure;
      for(int i = 0; i < centers.size(); i++){
          OrderingStructure<point> o;
          orderingStructure.push_back(o);
+         coordinates.insert(to_string(centers[i].x) + ',' + to_string(centers[i].y));
+         centers[i].color = fillColor(centers[i]);
          orderingStructure[i].add(point(centers[i]));
      }
 
+    while(coordinates.size() != img.width*img.height){
+        for(int i = 0; i < orderingStructure.size(); i++){
+            if(!orderingStructure[i].isEmpty()){
+                point p = orderingStructure[i].remove();
+                vector<point> validNeighbours = validNeighbours(center[i], p, img, coordinates, p.level+1);
+                for(int j = 0; j < validNeighbours.size(); j++){
+                    coordinates.insert(to_string(validNeighbours[j].x) + ',' + to_string(validNeighbours[j].y));
+                    HSLAPixel * pixel = *img.getPixel(validNeighbours[j].x, validNeighbours[j].y);
+                    *pixel = fillColor(validNeighbours[j]);
+                    orderingStructure[i].add(validNeighbours[j]);
+                }
+            }
+        //for valid points, insert coordinates, change color, add point to ordering structure
+        //if k changes levels, go to next one
+        }
+    }
+
+
+
      
 } 
+
+bool filler::checkValidPoint(center center, int x, int y, PNG& img, unordered_set<string> coordinates, int k){
+    //check to see if it's in the image
+    if(x <0 || y <0){
+        return false;
+    }
+    if(x > img.width || y > img.height){
+        return false;
+    }
+    //check to see if its been processsed already
+    if(coordinates.find(to_string(x) + "," + to_string(y)) != coordinates.end()){
+        return false;
+    }
+    //check to see if its less than k the distance to the center
+    if(pow(k, 2) < (pow(center.x - x, 2) + pow(center.y - y, 2))){
+        return false;
+    }
+    return true;
+}
+
+vector<point> filler::validNeighbours(center center, point p, PNG& img, unordered_set<string> coordinates, int k){
+    vector<point> validNeighbours;
+    //TOP
+    pushValidNeighbours(center, p.x, p.y-1, img, coordinates, k);
+    //TOPLEFT
+    pushValidNeighbours(center, p.x-1, p.y-1, img, coordinates, k);
+    //LEFT
+    pushValidNeighbours(center, p.x-1, p.y, img, coordinates, k);
+    //BOTTOM LEFT
+    pushValidNeighbours(center, p.x-1, p.y+1, img, coordinates, k);
+    //BOTTOM
+    pushValidNeighbours(center, p.x, p.y+1, img, coordinates, k);
+    //BOTTOM RIGHT
+    pushValidNeighbours(center, p.x+1, p.y+1, img, coordinates, k);
+    //RIGHT
+    pushValidNeighbours(center, p.x+1, p.y, img, coordinates, k);
+    //TOP RIGHT
+    pushValidNeighbours(center, p.x+1, p.y-1, img, coordinates, k);
+    
+    return validNeighbours;
+}
+
+void filler::pushValidNeighbours(center center, int x, int y, PNG& img, unordered_set<string> coordinates, int k, vector<point>& validNeighbours){
+    if(checkValidPoint(center, x, y, img, coordinates, k)){
+        validNeighbours.push_back(point(x, y, center, k));
+    }
+}
+
+
