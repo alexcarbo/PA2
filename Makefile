@@ -21,11 +21,11 @@ $(TESTFILLS) : $(OBJS_FILLS_STUDENT) $(OBJS_FILLS_PROVIDED)
 testStackQueue.o : testStackQueue.cpp cs221util/PNG.h cs221util/HSLAPixel.h stack.h queue.h deque.h
 	$(CXX) $(CXXFLAGS) testStackQueue.cpp
 
-testFills.o : testFills.cpp cs221util/PNG.h cs221util/HSLAPixel.h point.h center.h stack.h queue.h deque.h vor.h vor.cpp vor_given.cpp dotColorPicker.h solidColorPicker.h fadeColorPicker.h
+testFills.o : testFills.cpp cs221util/PNG.h cs221util/HSLAPixel.h point.h center.h stack.h queue.h deque.h vor.h vor.cpp vor_given.cpp dotColorPicker.h solidColorPicker.h fadeColorPicker.h customColorPicker.h customColorPicker.cpp
 	$(CXX) $(CXXFLAGS) testFills.cpp
 
 # Pattern rules for object files
-%.o: %.cpp 
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) $< -o $@
 
 PNG.o : cs221util/PNG.cpp cs221util/PNG.h cs221util/HSLAPixel.h cs221util/lodepng/lodepng.h
@@ -39,4 +39,3 @@ lodepng.o : cs221util/lodepng/lodepng.cpp cs221util/lodepng/lodepng.h
 
 clean:
 	rm -rf $(TESTSQ) $(TESTFILLS) $(OBJS_DIR) *.o
-

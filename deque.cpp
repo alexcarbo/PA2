@@ -36,8 +36,7 @@ void Deque<T>::pushR(T newItem)
 template <class T>
 T Deque<T>::popL()
 {
-   T leftMost = data.front();
-   data.erase(data.begin());
+   T leftMost = data[n2];
    n2++;n1--;
    if(n1 <= n2) {
      vector<T> newData;
@@ -77,7 +76,7 @@ T Deque<T>::popR()
 template <class T>
 T Deque<T>::peekL()
 {
-    return data.front();
+    return data[n2];
 }
 
 

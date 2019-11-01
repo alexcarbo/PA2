@@ -25,7 +25,7 @@ using namespace cs221util;
 using namespace std;
 
 /**
- * filler namespace: specifies a set of functions for creating 
+ * filler namespace: specifies a set of functions for creating
  * artistic effects using voronoi diagrams based on images
  *
  */
@@ -33,7 +33,7 @@ namespace filler
 {
 
         /**
-         * Performs a voronoi fill based on the given image using the color of 
+         * Performs a voronoi fill based on the given image using the color of
          * the centers and employing a depth-first-search approach.
          *
          * @param img The image to be simulated
@@ -47,10 +47,10 @@ namespace filler
         animation vorSolidDFS(PNG& img, double density, int frameFreq);
 
         /**
-         * Performs a voronoi fill based on the given image using the color of 
+         * Performs a voronoi fill based on the given image using the color of
          * the centers and employing a depth-first-search approach. This fill
-         * fades the center color using the fade factor, at each level of the 
-         * algorithm. 
+         * fades the center color using the fade factor, at each level of the
+         * algorithm.
          *
          * @param img The image to be simulated
          * @param double density used to determine the number of centers.
@@ -65,7 +65,7 @@ namespace filler
 
 
         /**
-         * Performs a voronoi fill based on the given image using the color of 
+         * Performs a voronoi fill based on the given image using the color of
          * the centers and employing a breadth-first-search approach.
          *
          * @param img The image to be simulated
@@ -78,10 +78,10 @@ namespace filler
          */
         animation vorSolidBFS(PNG& img, double density, int frameFreq);
         /**
-         * Performs a voronoi fill based on the given image using the color of 
+         * Performs a voronoi fill based on the given image using the color of
          * the centers and employing a breadth-first-search approach. This fill
-         * fades the center color using the fade factor, at each level of the 
-         * algorithm. 
+         * fades the center color using the fade factor, at each level of the
+         * algorithm.
          *
          * @param img The image to be simulated
          * @param double density used to determine the number of centers.
@@ -94,7 +94,7 @@ namespace filler
          */
         animation vorFadeBFS(PNG& img, double density, double fadeFactor, int frameFreq);
 
-        /* The following two functions are given to you as examples of 
+        /* The following two functions are given to you as examples of
          * working fill functions.
         */
 
@@ -132,10 +132,10 @@ namespace filler
         animation vorDotBFS(PNG& img, double density,
                            int dotGrid, int dotSize, int frameFreq);
 
-        bool checkValidPoint(center center, int x, int y, PNG& img, unordered_set<string>& coordinates, int k);
-        vector<point> giveValidNeighbours(center center, point p, PNG& img, unordered_set<string>& coordinates, int k);
-        void pushValidNeighbours(center center, int x, int y, PNG& img, unordered_set<string> coordinates, int k, vector<point>& validNeighbours);
-/* 
+        bool checkValidPoint(center center, int x, int y, PNG& img, vector<vector<int>>& coordinates, int k);
+        vector<point> giveValidNeighbours(center center, point p, PNG& img, vector<vector<int>>& coordinates, int k);
+        void pushValidNeighbours(center center, int x, int y, PNG& img, vector<vector<int>>& coordinates, int k, vector<point>& validNeighbours);
+/*
  * Given in file vor_given.cpp. samples randomly or regularly.  It will
  * generate regular centers for the test cases.
 */
@@ -160,7 +160,7 @@ vector<center> randSample(PNG& img, double density);
     template <template <class T> class OrderingStructure>
     animation vor(PNG& img, double density, colorPicker& fillColor,
                    int frameFreq);
-    
+
 
 
 }
