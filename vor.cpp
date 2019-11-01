@@ -242,7 +242,7 @@ bool filler::checkValidPoint(center center, int x, int y, PNG& img,  vector<vect
         return false;
     }
     //check to see if its less than k the distance to the center
-    if(pow(k, 2) < (pow(center.x - x, 2.0)) + pow(center.y - y, 2)){
+    if(pow(k, 2) < (pow(center.x - x, 2)) + pow(center.y - y, 2)){
         return false;
     }
     return true;
