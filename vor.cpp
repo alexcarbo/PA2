@@ -176,12 +176,12 @@ animation filler::vor(PNG& img, double density, colorPicker& fillColor,
       * used to generate the original set of centers. 
       */
 
-     vector<class T> centers = randSample(img, density);
-     vector<OrderingStructure<class T>> orderingStructure;
+     vector<center> centers = randSample(img, density);
+     vector<OrderingStructure<point>> orderingStructure;
      for(int i = 0; i < centers.size(); i++){
-         OrderingStructure<class T> o;
+         OrderingStructure<point> o;
          orderingStructure.push_back(o);
-         orderingStructure[i].add(centers[i]);
+         orderingStructure[i].add(point(centers[i]));
      }
 
      

@@ -7,7 +7,7 @@ solidColorPicker::solidColorPicker()
 
 HSLAPixel solidColorPicker::operator()(point p)
 {
-    Center c = p.c;
+    center c = p.c;
     HSLAPixel color = c.color;
     return color;
 
