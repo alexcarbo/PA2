@@ -19,6 +19,7 @@
 #include "fadeColorPicker.h"
 #include <random>
 #include <vector>
+#include <unordered_set>
 
 using namespace cs221util;
 using namespace std;
@@ -131,9 +132,9 @@ namespace filler
         animation vorDotBFS(PNG& img, double density,
                            int dotGrid, int dotSize, int frameFreq);
 
-bool checkValidPoint(center center, int x, int y, PNG& img, unordered_set<string>& coordinates, int k);
-vector<point> validNeighbours(center center, point p, PNG& img, unordered_set<string>& coordinates, int k);
-void pushValidNeighbours(center center, int x, int y, PNG& img, unordered_set<string> coordinates, int k, vector<point>& validNeighbours);
+        bool checkValidPoint(center center, int x, int y, PNG& img, unordered_set<string>& coordinates, int k);
+        vector<point> giveValidNeighbours(center center, point p, PNG& img, unordered_set<string>& coordinates, int k);
+        void pushValidNeighbours(center center, int x, int y, PNG& img, unordered_set<string> coordinates, int k, vector<point>& validNeighbours);
 /* 
  * Given in file vor_given.cpp. samples randomly or regularly.  It will
  * generate regular centers for the test cases.
@@ -159,6 +160,7 @@ vector<center> randSample(PNG& img, double density);
     template <template <class T> class OrderingStructure>
     animation vor(PNG& img, double density, colorPicker& fillColor,
                    int frameFreq);
+    
 
 
 }
