@@ -179,14 +179,20 @@ animation filler::vor(PNG& img, double density, colorPicker& fillColor,
      unordered_set <string> coordinates;
      vector<center> centers = randSample(img, density);
      vector<OrderingStructure<point>> orderingStructure;
+     int frameFreqCount = 0;
      for(int i = 0; i < centers.size(); i++){
          OrderingStructure<point> o;
          orderingStructure.push_back(o);
          coordinates.insert(to_string(centers[i].x) + ',' + to_string(centers[i].y));
-         centers[i].color = fillColor(point(centers[i]));
+         *img.getPixel(centers[i].x, centers[i].y) = fillColor(point(centers[i]));
          orderingStructure[i].add(point(centers[i]));
+         if(frameFreqCount == frameFreq){
+            animation.addFrame(img);
+            frameFreqCount = 0;
+         }
+         frameFreqCount++;
      }
-    int frameFreqCount = 1;
+
     while(coordinates.size() != img.width()*img.height()){
         for(int i = 0; i < orderingStructure.size(); i++){
             if(!orderingStructure[i].isEmpty()){
@@ -206,6 +212,8 @@ animation filler::vor(PNG& img, double density, colorPicker& fillColor,
         //for valid points, insert coordinates, change color, add point to ordering structure
         //if k changes levels, go to next one
         }
+        cout<<coordinates.size()<<endl;
+        cout<<img.width()*img.height()<<endl;
     }
 
     return animation;
@@ -216,7 +224,7 @@ bool filler::checkValidPoint(center center, int x, int y, PNG& img, unordered_se
     if(x <0 || y <0){
         return false;
     }
-    if(x > img.width() || y > img.height()){
+    if(x >= img.width() || y >= img.height()){
         return false;
     }
     //check to see if its been processsed already
