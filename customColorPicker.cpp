@@ -6,7 +6,7 @@ customColorPicker::customColorPicker()
 
 HSLAPixel customColorPicker::operator()(point p)
 {
-    Center c = p.c;
+    center c = p.c;
     HSLAPixel colour = c.color;
     int hue = colour.h;
     hue = (hue + 180) % 360
