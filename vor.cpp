@@ -19,7 +19,7 @@ animation filler::vorSolidDFS(PNG& img, double density, int frameFreq)
     /**
      * @todo Your code here! 
      */
-    solidColorPicker a();
+    solidColorPicker a;
     return vor<Stack>(img, density, a, frameFreq);
 
 }
@@ -47,7 +47,7 @@ animation filler::vorSolidBFS(PNG& img, double density, int frameFreq)
     /**
      * @todo Your code here! 
      */
-    solidColorPicker a();
+    solidColorPicker a;
     return vor<Queue>(img, density, a, frameFreq);
 }
 
@@ -176,12 +176,13 @@ animation filler::vor(PNG& img, double density, colorPicker& fillColor,
       * used to generate the original set of centers. 
       */
 
-     vector<center> centers = randSample(img, density);
-     vector<OrderingStructure> orderingStructure;
+     vector<class T> centers = randSample(img, density);
+     vector<OrderingStructure<class T>> orderingStructure;
      for(int i = 0; i < centers.size(); i++){
-         orderingStructure.push_back(orderingStructure());
+         OrderingStructure<class T> o;
+         orderingStructure.push_back(o);
          orderingStructure[i].add(centers[i]);
      }
-     
+
      
 } 
